@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    #copiedMessage {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+    <%- include('topmenu') %>
+    <div class="container">
+        <h1>URL Shortener</h1>
+
+        <% if (shortenedurl) { %>
+            <p class="mlabel">Shortened URL:</p>
+            <br>
+            <div class="mlabel" id="shortenedurl"><%= shortenedurl %></div>
+            <br>
+            <div class="mlabel" id="copiedMessage">Copied!</div>
+            <br>
+            <button id="copyURL">Copy</button>
+            <button id="newURL">New URL</button>
+        <% } else { %>
+            <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+            <% } %>
+
+            <form action="/short" method="POST">
+                <label class="mlabel" for="realurl">URL:</label>
+                <input type="text" name="realurl" id="realurl" required style="margin-top: 5px;"><br>
+                <br>
+                <button type="submit">Shorten</button>
+            </form>
+        <% } %>
+
+        <br>
+    </div>
+    <% if (shortenedurl) { %>
+    <script>
+        document.getElementById("copyURL").addEventListener("click", function() {
+            const noteUrlContent = document.getElementById("shortenedurl").textContent;
+
+            navigator.clipboard.writeText(noteUrlContent).then(() => {
+                const copiedMessage = document.getElementById("copiedMessage");
+                copiedMessage.style.display = "block";
+                copiedMessage.style.opacity = 1;
+
+                setTimeout(() => {
+                    copiedMessage.style.opacity = 0;
+                    setTimeout(() => {
+                        copiedMessage.style.display = "none";
+                    }, 1000);
+                }, 3000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        });
+        document.getElementById("newURL").addEventListener("click", function() {
+            window.location.href = "/short";
+        });
+    </script>
+    <% } %>
+</body>
+</html>

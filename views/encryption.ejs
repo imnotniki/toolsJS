@@ -1,0 +1,14 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+
+
+    document.getElementById("encryptButton").addEventListener("click", function() {
+        const secretKey = document.getElementById('encryptionKey').textContent;
+        const noteTextField = document.getElementById('noteText');
+        const plainText = noteTextField.value;
+
+        const encryptedText = CryptoJS.AES.encrypt(plainText, secretKey).toString();
+        
+        noteTextField.value = encryptedText;
+    });
+</script>

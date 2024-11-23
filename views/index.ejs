@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shananiki Tools</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('topmenu') %>
+    <div class="container">
+        <h1>Tools</h1>
+
+        <button id="privateNoteButton">Private Notes</button>
+        <button id="urlShortenerButton" style="margin-top: 5px;">URL Shortener</button>
+        <br>
+        <br>
+        
+    </div>
+    <script>
+      document.getElementById("privateNoteButton").addEventListener("click", function() {
+            window.location.href = "/note";
+      });
+      document.getElementById("urlShortenerButton").addEventListener("click", function() {
+            window.location.href = "/short";
+      });
+  </script>
+</body>
+</html>

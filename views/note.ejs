@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    #copiedMessage {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+    <%- include('topmenu') %>
+    <div class="container">
+        <% if (error) { %>
+          <!-- Error Message -->
+          <p style="color: red;"><%= error %></p>
+        <% } %>
+
+        <% if (noteUrl && !note) { %>
+          <!-- Note Created View -->
+          <h1>Note Created</h1>
+          <p class="mlabel">Note URL:</p>
+          <div class="mlabel" id="noteUrl"><%= noteUrl %></div>
+          <div class="mlabel" id="copiedMessage">Copied!</div>
+          <div style="margin-top: 15px;">
+            <button id="copyNote">Copy</button>
+            <button id="newNote">New Note</button>
+          </div>
+
+        <% } else if (note) { %>
+          <!-- Reading Note View -->
+          <h1>Reading your Note</h1>
+          <div class="mlabel" id="note"><%= note %></div>
+          <form action="/deleteNote/<%= noteDeleteKey %>" method="POST" style="margin-top: 15px;">
+            <input type="text" name="encryptionKey" id="encryptionKey" style="margin-top: 5px;"><br>
+            <button type="submit">Delete Note</button>
+          </form>
+          <button id="decryptButton" style="margin-top: 5px;">Decrypt</button>
+          <%- include('decryption') %>
+          <button id="newNote" style="margin-top: 5px;">New Note</button>
+
+        <% } else if (message) { %>
+          <!-- Note Not Found or Deleted View -->
+          <h1><%= message %></h1>
+          <button id="newNote">New Note</button>
+
+        <% } else { %>
+          <!-- Create Note Form -->
+          <h1>Create a Note</h1>
+          <form action="/note" method="POST">
+            <label class="mlabel" for="noteText">Note:</label>
+            <input type="text" name="noteText" id="noteText" required style="margin-top: 5px;"><br>
+            <label class="mlabel" for="encryptionKey">Encryption:</label>
+            <input type="text" name="encryptionKey" id="encryptionKey" style="margin-top: 5px;"><br>
+            
+            <button type="submit">Create Note</button>
+          </form>
+          <button id="encryptButton" style="margin-top: 5px;">Encrypt</button>
+          <%- include('encryption') %>
+        <% } %>
+    </div>
+
+    <!-- JavaScript -->
+    <% if (noteUrl) { %>
+      <script src="note.js"></script> 
+    <% } %>
+    <script>
+      document.getElementById("newNote").addEventListener("click", function() {
+        window.location.href = "/note";
+      });
+    </script>
+</body>
+</html>
