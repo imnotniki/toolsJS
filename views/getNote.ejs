@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('topmenu') %>
+    <div class="container">
+        <h1>Reading your Note</h1>
+
+
+        <form action="/newNote" method="POST">
+        
+          <label class="mlabel" for="noteText">Note:</label>
+          <div class="mlabel" id="note"><%= note %></div>
+          <br>
+
+          <button type="submit">New Note</button>
+        </form>
+        <form action="/deleteNote/<%= noteDeleteKey %>" method="POST" style="margin-top: 5px;">
+          <button type="submit">Delete Note</button>
+        </form>
+
+        <br>
+    </div>
+</body>
+</html>

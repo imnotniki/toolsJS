@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    #copiedMessage {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+    <%- include('topmenu') %>
+    <div class="container">
+        <h1>Note</h1>
+
+        <p class="mlabel">Note URL:</p>
+        <br>
+        <div class="mlabel" id="noteUrl"><%= noteUrl %></div>
+        <br>
+        <div class="mlabel" id="copiedMessage">Copied!</div>
+        <br>
+        <button id="copyNote">Copy</button>
+        <button id="newNote">New Note</button>
+        <br>
+
+
+        <br>
+    </div>
+    <script>
+      document.getElementById("copyNote").addEventListener("click", function() {
+          const noteUrlContent = document.getElementById("noteUrl").textContent;
+
+          navigator.clipboard.writeText(noteUrlContent).then(() => {
+                const copiedMessage = document.getElementById("copiedMessage");
+                copiedMessage.style.display = "block";
+                copiedMessage.style.opacity = 1; 
+                
+                setTimeout(() => {
+                    copiedMessage.style.opacity = 0;
+                    setTimeout(() => {
+                        copiedMessage.style.display = "none";
+                    }, 1000); 
+                }, 3000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+      });
+      document.getElementById("newNote").addEventListener("click", function() {
+            window.location.href = "/note";
+      });
+  </script>
+</body>
+</html>
