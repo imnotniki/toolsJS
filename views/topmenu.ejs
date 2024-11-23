@@ -1,21 +1,21 @@
 <link rel="stylesheet" href="/topmenu.css">
 <div id="navbar" style="margin-top: 5px">
-    <button class="navbutton" id="homeButton">Home</button>
-    <button class="navbutton" id="shananikiButton">shananiki</button>
-    <button class="navbutton" id="privateNoteButton">Private Note</button>
-    <button class="navbutton" id="urlShortenerButton">URL Shortener</button>
+    <button class="navbutton" id="homeButtonNav">Home</button>
+    <button class="navbutton" id="shananikiButtonNav">shananiki</button>
+    <button class="navbutton" id="privateNoteButtonNav">Private Note</button>
+    <button class="navbutton" id="urlShortenerButtonNav">URL Shortener</button>
 </div>
 <script>
-    document.getElementById("homeButton").addEventListener("click", function() {
+    document.getElementById("homeButtonNav").addEventListener("click", function() {
         window.location.href = "/";
     });
-    document.getElementById("shananikiButton").addEventListener("click", function() {
+    document.getElementById("shananikiButtonNav").addEventListener("click", function() {
         window.location.href = "https://shananiki.de";
     });
-    document.getElementById("privateNoteButton").addEventListener("click", function() {
+    document.getElementById("privateNoteButtonNav").addEventListener("click", function() {
         window.location.href = "/note";
     });
-    document.getElementById("urlShortenerButton").addEventListener("click", function() {
+    document.getElementById("urlShortenerButtonNav").addEventListener("click", function() {
         window.location.href = "/short";
     });
 </script>
